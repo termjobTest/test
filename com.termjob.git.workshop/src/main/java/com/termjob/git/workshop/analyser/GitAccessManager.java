@@ -40,26 +40,6 @@ public class GitAccessManager {
 	 */
 	public static void main(String[] args)
 			throws InvalidRemoteException, TransportException, GitAPIException, IOException {
-//		Git.cloneRepository().setURI("https://github.com/eclipse/jgit.git")
-//				.setDirectory(new File("/path/to/targetdirectory")) // #1
-//				.call();
-//		
-//		
-//		Git git = Git.cloneRepository()
-//                .setURI("https://github.com/eclipse/jgit.git")
-//                .setDirectory(new zzz=File("/path/to/targetdirectory"))
-////                .setTransportConfigCallback(getTransportConfigCallback())
-//                .setCredentialsProvider(new UsernamePasswordCredentialsProvider("", ""))
-//                .call();
-//		Repository repo = git.getRepository();
-
-//		JGitUtil
-
-		// sample commit
-//
-//		Git.cloneRepository().setURI("https://github.com/eclipse/jgit.git")
-//				.setDirectory(new File("/path/to/targetdirectory")) // #1
-//				.call();
 
 		File directory = new File("C:/E drive/IndieMakers/dump/targetdirectory" + System.currentTimeMillis());
 		System.out.println(directory.getAbsolutePath());
@@ -72,26 +52,13 @@ public class GitAccessManager {
 				.setCredentialsProvider(new UsernamePasswordCredentialsProvider("", "")).call();
 		Repository repo = git.getRepository();
 
-//		Iterable<RevCommit> zz = git.log().all().call();
-//		int i = 0;
-//		for (RevCommit commit : zz) {
-//			i++;
-//			
-//			System.out.println(commit.getName());
-//			System.out.println(commit.getAuthorIdent().getName());
-//			System.out.println(new Date(commit.getCommitTime() * 1000L));
-//			System.out.println(commit.getFullMessage());
-//			System.out.println("______________________________");
-//		}
-//		System.out.println(i);
-//		System.out.println("####################################################");
-
 		RevWalk walk = new RevWalk(repo);
 //		RevCommit commit = walk.parseCommit(repo.resolve("1f4f9a080721b1c1780117f5bd83ed862adf2148"));
-		RevCommit commit = walk.parseCommit(repo.resolve("d89a6fb8d72bc463c297f5b5fd49b2dc64fa7ee8"));
+		//75b55a75a744f47b4e7bda0a4480cdc95f6fde3f
+		RevCommit commit = walk.parseCommit(repo.resolve("1f4f9a080721b1c1780117f5bd83ed862adf2148"));
 //		System.out.println(commit.getName());
 
-		analysis(repo,commit);
+		analysis(repo, commit);
 //		analyssForFile(repo);
 
 //		List<String> fileListInCommit = getGitFileList("d89a6fb8d72bc463c297f5b5fd49b2dc64fa7ee8",repo);
@@ -140,7 +107,7 @@ public class GitAccessManager {
 			RevWalk rw = new RevWalk(repo);
 //		    RevCommit commit = rw.parseCommit(repo.resolve("486817d67b")); // Any ref will work here (HEAD, a sha1, tag, branch)
 			RevTree parentTree = null;
-			if (commit.getParentCount()>0) {
+			if (commit.getParentCount() > 0) {
 				RevCommit parent = rw.parseCommit(commit.getParent(0).getId());
 				parentTree = parent.getTree();
 			}
@@ -157,8 +124,12 @@ public class GitAccessManager {
 //				System.out.println(diff.getOldPath());
 //		    	System.out.println(diff.getDiffAttribute().toString());
 				for (Edit edit : df.toFileHeader(diff).toEditList()) {
-					linesDeleted += edit.getEndA() - edit.getBeginA();
-					linesAdded += edit.getEndB() - edit.getBeginB();
+					int i = edit.getEndA() - edit.getBeginA();
+					System.out.println("deleted number " + i);
+					linesDeleted += i;
+					int j = edit.getEndB() - edit.getBeginB();
+					System.out.println("added number " + j);
+					linesAdded += j;
 				}
 			}
 		} catch (IOException e1) {
