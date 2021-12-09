@@ -23,7 +23,7 @@
 		<commons-lang3.version>3.7</commons-lang3.version>
 		<guava.version>24.1.1</guava.version>
 		<jjwt.version>0.9.0</jjwt.version>
-		<jackson.version>2.9.10.5</jackson.version>
+		<jackson.version>2.9.10.8</jackson.version>
 		<swagger.version>2.7.0</swagger.version>
 		<spring-social-google.version>1.0.0.RELEASE</spring-social-google.version>
 
